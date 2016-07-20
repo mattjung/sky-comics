@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+  div(class="options")
+    div(class="col-sm-4 col-md-4")
+      select
+        option(value=1) Book
+    div(class="col-sm-4 col-md-4")
+      img(onclick="startDictation()" src="images/speech.png")
+    div(class="col-sm-4 col-md-4 ")
+      input(type="text" name="query" id="transcript" placeholder="Search")
+      input(id="submit-search" type="submit", value="Submit")
+
+
+
+
+
+  div(id="images")
+  div(class="error" hidden="true")
