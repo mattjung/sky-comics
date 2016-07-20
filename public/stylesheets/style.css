@@ -1,3 +1,5 @@
+@import "sky-toolkit-core/all";
+
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -10,21 +12,32 @@ figure {
   display: inline-block;
   padding: 0;
   margin: 0;
-  width: 100px;
-  height: 170px;
-  background-position: 50% 50%;
+  width: 150px;
+  height: 200px;
+  /*background-position: 50% 50%;*/
   /*background-attachment: fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+
+.comic-thumbnail{
+  display: inline-block;
+  margin: 10px;
+}
+
 .error {
   font-family: 'Courier New', monospace;
   color: rgb(239, 38, 38);
   font-weight: bold;
   font-size: 12px;
   padding: 5px;
+}
+
+.options{
+  clear: both;
+  height: 70px;
 }
 
 .options input {
@@ -51,6 +64,13 @@ figure {
 
 .container{
   width: 1000px;
+}
+
+
+.shelf{
+  width: 100%;
+  overflow-y: scroll;
+  white-space: nowrap;
 }
 
 .navbar,

@@ -4,17 +4,19 @@ block content
 
   div(class="options")
     div(class="col-sm-4 col-md-4")
-      select
-        option(value=1) Book
+      select(class="c-form-select")
+        option(value=1) Relevance
+        option(value=2) Lowest to Higest Price
     div(class="col-sm-4 col-md-4")
       img(onclick="startDictation()" src="images/speech.png")
     div(class="col-sm-4 col-md-4 ")
       input(type="text" name="query" id="transcript" placeholder="Search")
       input(id="submit-search" type="submit", value="Submit")
 
+  div(class="store-container")
+    div(id="search-results" class="shelf")
+    h1 New
+    div(class="shelf new-shelf")
+      
 
-
-
-
-  div(id="images")
   div(class="error" hidden="true")

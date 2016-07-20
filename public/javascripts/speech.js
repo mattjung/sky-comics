@@ -1,10 +1,30 @@
 $( document ).ready(function() {
   if ($('#transcript').value != "") {
     $("#submit-search").click(function(){
-      console.log($('#transcript').val());
-      sendAjaxQuery('doSearch',{"query":$('#transcript').val()})
+      ajaxPost('doSearch',{"query":$('#transcript').val()}, function(data){
+        var results = $('#search-results');
+        results.empty();
+        $.each(data.imageURLs,function(index,value){
+          var figure = document.createElement('figure')
+          figure.style.backgroundImage = 'url(' + value + ')'
+          figure.className += "comic-thumbnail"
+          results.append(figure)
+        });
+      });
     });
   }
+
+  ajaxGet('getFeaturedComics',function(data){
+    var store = $('.new-shelf');
+    store.empty();
+    $.each(data.imageURLs,function(index,value){
+      var figure = document.createElement('figure')
+      figure.style.backgroundImage = 'url(' + value + ')'
+      figure.className += "comic-thumbnail"
+
+      store.append(figure)
+    });
+  });
 });
 
 function startDictation() {
@@ -23,7 +43,17 @@ function startDictation() {
       document.getElementById('transcript').value
                                = e.results[0][0].transcript;
       recognition.stop();
-      sendAjaxQuery('doSearch',{"query":document.getElementById('transcript').value})
+      ajaxPost('doSearch',{"query":document.getElementById('transcript').value}, function(data){
+        var results = $('#search-results');
+        results.empty();
+        $.each(data.imageURLs,function(index,value){
+          var figure = document.createElement('figure')
+          figure.style.backgroundImage = 'url(' + value + ')'
+          figure.className += "comic-thumbnail"
+
+          results.append(figure)
+        });
+      });
       // document.getElementById('labnol').submit();
     };
 
@@ -34,20 +64,28 @@ function startDictation() {
   }
 }
 
-function sendAjaxQuery(url, data) {
+function ajaxPost(url, data, callback) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        dataType:'json',
+        success: function (data) {
+          callback(data);
+        },
+        error: function (xhr, status, error) {
+            alert('Error: ' + error.message);
+        }
+    });
+  }
+
+  function ajaxGet(url, callback) {
       $.ajax({
-          type: 'POST',
+          type: 'GET',
           url: url,
-          data: data,
           dataType:'json',
           success: function (data) {
-            var images = $('#images');
-            images.empty();
-            $.each(data.imageURLs,function(index,value){
-              var figure = document.createElement('figure')
-              figure.style.backgroundImage = 'url(' + value + ')'
-              images.append(figure)
-            })
+            callback(data)
 
           },
           error: function (xhr, status, error) {
