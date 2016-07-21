@@ -1,7 +1,8 @@
 @import "sky-toolkit-core/all";
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Sky Text" !important;
+  font: 14px;
 }
 
 a {
@@ -83,6 +84,6 @@ figure {
 }
 
 #main-container{
-  margin: 60px;
+  margin-top: 60px;
   padding: 20px;
 }
